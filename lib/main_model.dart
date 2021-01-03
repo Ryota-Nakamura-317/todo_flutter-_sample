@@ -13,4 +13,18 @@ class MainModel extends ChangeNotifier {
     this.todoList = todoList;
     notifyListeners();
   }
+
+//リアルタイム更新
+  void getTodoListRealtime() {
+    final snapshots =
+        FirebaseFirestore.instance.collection('todoList').snapshots();
+    snapshots.listen((snapshot) {
+      final docs = snapshot.docs;
+      final todoList = docs.map((doc) => Todo(doc)).toList();
+      //並び順、ソートの掛け方
+      todoList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      this.todoList = todoList;
+      notifyListeners();
+    });
+  }
 }
