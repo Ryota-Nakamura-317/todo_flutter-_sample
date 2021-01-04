@@ -27,7 +27,7 @@ class MainPage extends StatelessWidget {
       create: (_) => MainModel()..getTodoListRealtime(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('todoアプリ'),
+          title: Text('TODOアプリ'),
           actions: [
             Consumer<MainModel>(builder: (context, model, child) {
               final isActive = model.checkedShouldActiveCompleteButton();
